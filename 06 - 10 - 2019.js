@@ -93,3 +93,66 @@ function equalizeArray(arr) {
 }
 
 console.log(equalizeArray(test))
+
+// Simple pig latin
+
+function pigIt(str){
+  return str.replace(/\w+/g, word => `${word.slice(1)}${word[0]}ay`);
+}
+
+
+// Find digits
+
+function findDigits(n) {
+
+  return n.toString().split("").map(digit => Number(digit)).filter(digit => n % digit === 0).length
+
+}
+
+// Cut the sticks
+
+function cutTheSticks(arr) {
+
+  let sortedArr = [...arr].sort((x, y) => y - x)
+
+  let numbers = []
+
+  while (sortedArr.length) {
+    
+    let min = Math.min(...sortedArr)
+    numbers.push(sortedArr.length)
+    sortedArr = sortedArr.filter(digit => digit !== min)
+    min = Math.min(...sortedArr)
+
+  }
+
+  return numbers
+
+}
+
+// How many games...
+
+let test = "20 3 6 80".split(" ").map(number => Number(number))
+
+function howManyGames(p, d, m, s) {
+  `
+  p = current price
+  d = discount
+  m = minimum possible price
+  s = money in my wallet
+  `
+  let discountedPrice = p
+  let counter = 0
+
+  while (s > m) {
+    
+    if (discountedPrice - d > m) {
+      counter ++, s -= discountedPrice, discountedPrice -= d
+    } else {
+      counter ++, s -= m
+    }
+  }
+
+  return counter
+
+}
